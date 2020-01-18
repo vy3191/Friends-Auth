@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Jumbotron, Card, CardBody, Button } from "reactstrap";
 import { AvForm, AvField } from "availity-reactstrap-validation";
-import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 
-export default function Login(props) {
+export default function NewFriends() {
   const defaultCredentials = {username:"", password:""};
   const [credentials, setCredentials] = useState(defaultCredentials);
-  const [isLogin, setIsLogin] = useState(false);
 
   const handleInput = (event) => {
      setCredentials({
@@ -16,22 +14,7 @@ export default function Login(props) {
      });
   };
   const handleSubmit = (event) => {
-    event.preventDefault()
-    console.log(credentials)
-    axios.post('http://localhost:5000/api/login', {
-             username: credentials.username,
-             password: credentials.password
-          })
-          .then( response => {
-             const token = response.data.payload;
-             localStorage.setItem('token', token);   
-             if(token) {
-              props.history.push('/home-page');
-             } 
-          })
-          .catch( error => {
-             console.log(error);
-          })
+     event.preventDefault();
      console.log(credentials);
   }
 
