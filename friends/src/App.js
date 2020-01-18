@@ -7,26 +7,30 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <div>
+      <div className='header'>
         <p>MANANGE YOUR FRIENDS</p>
       </div>
       <Router>
          <div>
-           <ul>
-             <li>
-               <Link to="/login">Login</Link>
-             </li>
+           <ul>             
              <li>
                <Link to="/get-friends">Get Friends</Link>
              </li>
              <li>
                <Link to="/add-friends">Add Friends</Link>
              </li>
+             <li>
+               <Link to="/login">Login</Link>
+             </li>
+             <li>
+               <Link to="/logout">Logout</Link>
+             </li>
            </ul>
          </div>
          <div>
            <Switch>
              <Route path="/" component={Login}/>
+             <Route path="/log-out" component={Login} />
              <Route component={PageNotFound} />
            </Switch>
          </div>
