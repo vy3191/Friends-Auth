@@ -5,6 +5,7 @@ import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 
+
 export default function Login(props) {
   const defaultCredentials = {username:"", password:""};
   const [credentials, setCredentials] = useState(defaultCredentials);
@@ -24,9 +25,12 @@ export default function Login(props) {
           })
           .then( response => {
              const token = response.data.payload;
-             localStorage.setItem('token', token);   
+             localStorage.setItem('token', token);  
+               props.history.push('/loading');
              if(token) {
-              props.history.push('/home-page');
+               setTimeout(() =>{
+                props.history.push('/home-page');
+               },1000);
              } 
           })
           .catch( error => {
