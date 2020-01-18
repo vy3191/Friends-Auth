@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col, Jumbotron, Card, CardBody, Button } from "reactstrap";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 
 export default function Login() {
+  const defaultCredentials = {username:"", password:""};
+  const [credentials, setCredentials] = useState(defaultCredentials);
+
+  const handleInput = (event) => {
+     setCredentials({
+        ...credentials, [event.target.name]:event.target.value
+     });
+  };
+  const handleSubmit = (event) => {
+     event.preventDefault();
+     console.log(credentials);
+  }
+
   return (
     <div className="App">
       <Container>
@@ -18,19 +31,19 @@ export default function Login() {
               <hr />
               <Card>
                 <CardBody>
-                <AvForm>
+                <AvForm onSubmit={handleSubmit}>
                       <AvField
-                        name="email"
-                        label="Email"
-                        type="text"
-                        validate={{
-                          required: true,
-                          email: true
-                        }}
+                        name="username"
+                        label="Username"
+                        value={credentials.username}
+                        onChange={handleInput}
+                        type="text"                        
                       />
                       <AvField
                         name="password"
                         label="Password"
+                        value={credentials.username}
+                        onChange={handleInput}  
                         type="password"                        
                       />
                       <Button id="submit">Submit</Button>
