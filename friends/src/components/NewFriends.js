@@ -26,7 +26,7 @@ export default function NewFriends() {
           <Col lg="8">
             <Jumbotron>
               <h3>
-                <u>Login Form</u>
+                <u>Add your new friend here...</u>
               </h3>
               <hr />
               <Card>

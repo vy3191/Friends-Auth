@@ -29,7 +29,7 @@ export default function Login(props) {
                props.history.push('/loading');
              if(token) {
                setTimeout(() =>{
-                props.history.push('/home-page');
+                props.history.push('/friends-list');
                },1000);
              } 
           })
@@ -45,11 +45,7 @@ export default function Login(props) {
         <Row>
           <Col />
           <Col lg="8">
-            <Jumbotron>
-              <h3>
-                <u>Login Form</u>
-              </h3>
-              <hr />
+            <Jumbotron>              
               <Card>
                 <CardBody>
                 <AvForm onSubmit={handleSubmit}>
