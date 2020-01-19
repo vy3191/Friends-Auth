@@ -4,6 +4,7 @@ import Home from './components/Home';
 import PageNotFound from './components/PageNotFound';
 import Friends from './components/Friends';
 import Loading from './components/Loading';
+import EditFriend from './components/EditFriend';
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 import './App.css';
 
@@ -37,6 +38,7 @@ function App() {
           <Route path="/login" component={Login}/>              
           <Route path="/loading" component={Loading} />
           <Route exact path="/friends-list" component={Friends} />
+          <Route path="/friends-list/:id" component={EditFriend} />
           <Route component={Login} />    
         </Switch>
       </div>      
