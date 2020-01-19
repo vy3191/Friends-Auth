@@ -3,7 +3,7 @@ import {Redirect} from 'react-router-dom';
 import Friend from './Friend';
 import axios from 'axios';
 
-function Friends({friends}) {
+function Friends({friends, update}) {
   //  console.log(props)
    return (
     <> 
@@ -11,7 +11,7 @@ function Friends({friends}) {
       <h1>Friends List</h1>
     </div>
     <div>
-      { friends.map( (friend,index) => (<Friend friend={friend} key={index}/>)) }
+      { friends.map( (friend,index) => (<Friend friend={friend} update={update} key={index}/>)) }
     </div>
     </>
   )

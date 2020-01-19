@@ -1,6 +1,7 @@
 import React, {useState,useEffect} from 'react';
 import {Button} from 'reactstrap';
 import axios from 'axios';
+import Friends from './Friends';
 
 export default function EditFriend(props) {
    const {id} = props.match.params;  
@@ -30,9 +31,12 @@ export default function EditFriend(props) {
    }
    
    const handleSubmit = (event) => {
+      console.log(friend)
       console.log(newFriend)
+      const updatedFriend = { ...newFriend}
+      console.log(updatedFriend)
       event.preventDefault();
-      axios.put(`http://localhost:5000/api/friends/${id}`,{...newFriend},
+      axios.put(`http://localhost:5000/api/friends/${id}`,{...updatedFriend},
                 {headers:{authorization:localStorage.getItem("token")}}
                 )
            .then( response => {

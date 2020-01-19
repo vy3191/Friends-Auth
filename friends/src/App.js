@@ -9,6 +9,7 @@ import EditFriend from './components/EditFriend';
 import PrivateRoute from './components/PrivateRoute';
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 import './App.css';
+import NewFriends from './components/NewFriends';
 
 function App() {
   const [friends, setFriends] = useState([]);  
@@ -37,18 +38,22 @@ function App() {
       </div>
       <div>
       <div>
-        <ul>             
+        <ul>   
+             {localStorage.getItem("token") &&          
              <li>
-               <Link exact to="/">Home</Link>
+             <Link exact to="/">Home</Link>
+             </li>}
+                     
+             <li>
+             {localStorage.getItem("token") && <Link exact to="/friends-list">Get Your Friends List</Link>}
              </li>
              <li>
-               <Link exact to="/login">Login</Link>
-             </li>             
-             <li>
-               <Link exact to="/friends-list">Get Your Friends List</Link>
+             {localStorage.getItem("token") && <Link exact to="/add-friends">Add a friend</Link>}
              </li>
              <li>
-               <Link exact to="/logout">Logout</Link>
+             {localStorage.getItem("token") && <Link exact to="/logout"><span onClick={
+                () => { console.log('working'); localStorage.clear()}
+             }>Logout</span></Link>}
              </li>
            </ul>
          </div>
@@ -58,8 +63,10 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route path="/login" component={Login}/>              
           <Route path="/loading" component={Loading} />
+          <PrivateRoute path="/logout" component={Home} />
           <PrivateRoute exact path="/friends-list" friends={friends} update={updateFriends} component={Friends} />
           <PrivateRoute path="/friends-list/:id" component={EditFriend} update={updateFriends} />
+          <PrivateRoute path="/add-friends" component={NewFriends} update={updateFriends} />
           <PrivateRoute component={PageNotFound} />  
         </Switch>
       </div>      
