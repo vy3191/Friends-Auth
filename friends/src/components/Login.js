@@ -27,10 +27,8 @@ export default function Login(props) {
              const token = response.data.payload;
              localStorage.setItem('token', token);  
                props.history.push('/loading');
-             if(token) {
-               setTimeout(() =>{
-                props.history.push('/friends-list');
-               },1000);
+             if(token) {               
+                props.history.push('/friends-list');               
              } 
           })
           .catch( error => {

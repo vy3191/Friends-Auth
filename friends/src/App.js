@@ -43,7 +43,9 @@ function App() {
              <li>
              <Link exact to="/">Home</Link>
              </li>}
-                     
+             <li to="/login">
+             <Link exact to="/login">Login</Link>
+             </li>        
              <li>
              {localStorage.getItem("token") && <Link exact to="/friends-list">Get Your Friends List</Link>}
              </li>
