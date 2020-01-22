@@ -9,7 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 export default function Login(props) {
   const defaultCredentials = {username:"", password:""};
   const [credentials, setCredentials] = useState(defaultCredentials);
-  const [isLogin, setIsLogin] = useState(false);
+  // const [isLogin, setIsLogin] = useState(false);
 
   const handleInput = (event) => {
      setCredentials({
@@ -26,17 +26,20 @@ export default function Login(props) {
           .then( response => {
              const token = response.data.payload;
              localStorage.setItem('token', token);  
-               props.history.push('/loading');
-             if(token) {               
-                props.history.push('/friends-list');               
+             props.history.push('/loading');
+             if(token) {
+               setTimeout(() =>{
+                props.history.push('/friends-list');
+               },1000);
              } 
           })
           .catch( error => {
              console.log(error);
           })
      console.log(credentials);
+     props.modify();
   }
-
+  console.log('Line41',props)
   return (
     <div className="App">
       <Container>
