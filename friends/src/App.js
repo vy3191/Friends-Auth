@@ -13,6 +13,9 @@ import NewFriends from './components/NewFriends';
 
 function App() {
   const [friends, setFriends] = useState([]);  
+  const localToken = localStorage.getItem("token");
+  const [token, setToken] = useState(localToken);
+  const [isLogin, setLogin] = useState(false);
   useEffect(() => { 
     axios.get('http://localhost:5000/api/friends', {headers:{authorization: localStorage.getItem('token')}})
     .then( response => {
@@ -24,7 +27,11 @@ function App() {
     .catch( err => {
        console.log(err)
     });
-  },[]);
+  },[isLogin]);
+
+  const modify = () => {
+     setLogin(true);
+  } 
 
   const updateFriends = (newFriendList) => {
     console.log(newFriendList)
@@ -39,21 +46,22 @@ function App() {
       <div>
       <div>
         <ul>   
-             {localStorage.getItem("token") &&          
+             { localToken &&          
              <li>
              <Link exact to="/">Home</Link>
              </li>}
-                     
+             <li to="/login">
+             <Link exact to="/login">Login</Link>
+             </li>        
              <li>
-             {localStorage.getItem("token") && <Link exact to="/friends-list">Get Your Friends List</Link>}
+             {localToken && token && <Link exact to="/friends-list">Get Your Friends List</Link>}
              </li>
              <li>
-             {localStorage.getItem("token") && <Link exact to="/add-friends">Add a friend</Link>}
+             {localToken && token&& <Link exact to="/add-friends">Add a friend</Link>}
              </li>
              <li>
-             {localStorage.getItem("token") && <Link exact to="/logout"><span onClick={
-                () => { console.log('working'); localStorage.clear()}
-             }>Logout</span></Link>}
+             {localToken && token && 
+             <Link exact to="/logout"><span onClick={() => {localStorage.clear(); setToken(null)} }>Logout</span></Link>}
              </li>
            </ul>
          </div>
@@ -61,7 +69,7 @@ function App() {
       <div>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/login" component={Login}/>              
+          <Route path="/login" render={ (props) => <Login {...props} modify={modify} />}/>              
           <Route path="/loading" component={Loading} />
           <PrivateRoute path="/logout" component={Home} />
           <PrivateRoute exact path="/friends-list" friends={friends} update={updateFriends} component={Friends} />
